@@ -161,3 +161,7 @@ export function arrayIncludes(
 export function removeExtension(filename: string): string {
   return filename.replace(/\.(js|mjs|cjs|ts|mts|cts|json|jsx|tsx)$/, "");
 }
+
+export function withTrailingSlash(path: string): string {
+  return path.endsWith("/") ? path : path + "/";
+}

@@ -1,7 +1,6 @@
 import Module from "node:module";
 import { promises as fsp } from "node:fs";
 import { resolve, relative, isAbsolute, normalize } from "pathe";
-import { withTrailingSlash } from "ufo";
 import type { PackageJson } from "pkg-types";
 import { colors } from "consola/utils";
 import { consola } from "consola";
@@ -10,7 +9,7 @@ import { createHooks } from "hookable";
 import prettyBytes from "pretty-bytes";
 import { glob } from "tinyglobby";
 import type { RollupOptions } from "rollup";
-import { dumpObject, rmdir, resolvePreset, removeExtension } from "./utils";
+import { dumpObject, rmdir, resolvePreset, removeExtension, withTrailingSlash } from "./utils";
 import type { BuildContext, BuildConfig, BuildOptions } from "./types";
 import { validatePackage, validateDependencies } from "./validate";
 import { rollupBuild } from "./builders/rollup";
@@ -254,7 +253,7 @@ async function _build(
     )) {
       if (
         dir === options.rootDir ||
-        options.rootDir.startsWith(withTrailingSlash(dir)) ||
+      options.rootDir.startsWith(withTrailingSlash(dir)) ||
         cleanedDirs.some((c) => dir.startsWith(c))
       ) {
         continue;
